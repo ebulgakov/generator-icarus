@@ -116,9 +116,15 @@ module.exports = function (grunt) {
 			}
 		},
 		less: {
-			dist: {
+			server: {
 				files: {
 					'<%%= yeoman.app %>/css/styles.css': ['<%%= yeoman.app %>/css/styles.less']
+				},
+				options: {
+					sourceMap: true,
+					sourceMapFilename: '<%%= yeoman.app %>/css/styles.css.map',
+					sourceMapBasepath: '<%%= yeoman.app %>/',
+					sourceMapRootpath: '/'
 				}
 			}
 		},
