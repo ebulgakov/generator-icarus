@@ -96,23 +96,31 @@ IcarusGenerator.prototype.editorConfig = function editorConfig() {
 	this.copy('editorconfig', '.editorconfig');
 };
 
-IcarusGenerator.prototype.h5bp = function h5bp() {
-	this.copy('favicon.ico', 'app/favicon.ico');
-	this.copy('404.html', 'app/404.html');
-	this.copy('robots.txt', 'app/robots.txt');
-	this.copy('htaccess', 'app/.htaccess');
-};
-
 IcarusGenerator.prototype.mainStylesheet = function mainStylesheet() {
-	var html = '@import "../bower_components/bootstrap/less/bootstrap.less";\n@icon-font-path: "../fonts/glyphicons/";\n\n';
+	var css = '\n@import "box/box";\n@import "elem/elem";\n@import "form/form";\n@import "icons/icons";\n@import "list/list";\n@import "nav/nav";';
+	var bsPath = '';
+	var deps = '';
+
+	deps += '@icon-path: "../img/i/";\n';
+	deps += '@img-path: "../img/d/";\n';
 
 	if (this.fontawesome) {
-		html = html + '@import "../bower_components/font-awesome/less/font-awesome.less";\n@fa-font-path: "../fonts/font-awesome";\n\n';
+		deps += '@icon-font-path: "../fonts/glyphicons/";\n';
 	}
 
-	html = html + '.browsehappy {\n  margin: 0.2em 0; \n  background: #ccc; \n  color: #000; \n  padding: 0.2em 0; \n}\n\n';
-	html = html + '.jumbotron {\n  margin: 50px auto 0 auto;\n}';
-	this.write('app/css/styles.less', html);
+	if (this.bootstrap) {
+		bsPath += '@import "../bower_components/bootstrap/less/bootstrap;"\n@import "bootstrap/variables;"\n';
+		this.write('app/css/bootstrap/variables.less', deps);
+	} else {
+		bsPath = '@import "system/bootstrap;"\n';
+		this.write('app/css/system/variables.less', deps);
+		var customBs = '@import (css) "../bower_components/normalize-css/normalize.css";\n';
+		customBs += '@import "variables";\n@import "mixins";\n@import "structure";\n@import "type";\n@import "utilities";\n';
+		this.write('app/css/system/bootstrap.less', customBs);
+	}
+
+
+	this.write('app/css/styles.less', bsPath + css);
 };
 
 IcarusGenerator.prototype.writeIndex = function writeIndex() {
@@ -176,10 +184,14 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 };
 
 IcarusGenerator.prototype.app = function app() {
-	this.mkdir('app');
-	this.mkdir('app/js');
-	this.mkdir('app/css');
-	this.mkdir('app/img');
+	this.directory('app');
 	this.write('app/index.html', this.indexFile);
 	this.write('app/js/main.js', this.mainJsFile);
+
+	if (!this.bootstrap) {
+		this.write('app/css/system/mixins.less', '/* Mixins */\n\n');
+		this.write('app/css/system/structure.less', '/* Custom structure Cols */\n\n');
+		this.write('app/css/system/type.less', '/* Typography */\n\n');
+		this.write('app/css/system/utilities.less', '/* Utilities Classes */\n\n');
+	}
 };

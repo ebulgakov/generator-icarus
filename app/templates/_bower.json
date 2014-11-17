@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     <% if (bootstrap) { %>"bootstrap": "~3",<% } %>
+    <% if (!bootstrap) { %>"normalize.css": "~3",<% } %>
     <% if (fontawesome) { %>"font-awesome": "~4",<% } %>
     "modernizr": "~2",
     "jquery": "~2",
