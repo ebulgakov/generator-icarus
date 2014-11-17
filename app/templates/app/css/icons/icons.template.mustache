@@ -2,7 +2,7 @@
 Icon classes can be used entirely standalone. They are named after their original file names.
 
 ```html
-<i class="icon-home"></i>
+<i class="icon-yeoman"></i>
 ```
 */
 [class*="icon-"] {
@@ -11,10 +11,9 @@ Icon classes can be used entirely standalone. They are named after their origina
 
 {{#items}}
 .{{name}} {
-	.icon-reset;
-	background-image: url("{{{escaped_image}}}");
-	background-position: {{px.offset_x}} {{px.offset_y}};
 	width: {{px.width}};
 	height: {{px.height}};
+	background-image: transparent url("{{{escaped_image}}}") {{px.offset_x}} {{px.offset_y}} no-repeat;
+	content: '';
 }
 {{/items}}

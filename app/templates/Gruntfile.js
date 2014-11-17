@@ -108,7 +108,6 @@ module.exports = function (grunt) {
 		includereplace: {
 			options: {
 				globals: {
-					includePartners: 'empty.html'
 				}
 			},
 			files: {
@@ -224,8 +223,22 @@ module.exports = function (grunt) {
 				}]
 			},
 			server: {
-				files: [{
-				}]
+				files: [<% if (fontawesome) { %>
+					{
+						expand: true,
+						dot: true,
+						cwd: '<%%= yeoman.app %>/bower_components/font-awesome/fonts/',
+						dest: '<%%= yeoman.app %>/fonts/font-awesome',
+						src: ['*']
+					}, <% } %><% if (bootstrap) { %>
+					{
+						expand: true,
+						dot: true,
+						cwd: '<%%= yeoman.app %>/bower_components/bootstrap/dist/fonts/',
+						dest: '<%%= yeoman.app %>/fonts/glyphicons',
+						src: ['*']
+					}, <% } %>
+				]
 			}
 		},
 		concurrent: {

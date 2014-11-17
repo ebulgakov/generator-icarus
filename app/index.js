@@ -13,13 +13,18 @@ var IcarusGenerator = module.exports = function IcarusGenerator (args, options, 
 	this.mainJsFile = '';
 
 	this.on('end', function () {
-		/*
+
 		if (!this.options['skip-install']) {
 			this.installDependencies({
 				skipMessage: options['skip-install-message'],
 				skipInstall: options['skip-install']
 			});
-		}*/
+		}
+
+		fs.symlinkSync('../bower_components', 'app/include/bower_components', 'dir');
+		fs.symlinkSync('../css', 'app/include/css', 'dir');
+		fs.symlinkSync('../img', 'app/include/img', 'dir');
+		fs.symlinkSync('../js', 'app/include/js', 'dir');
 	});
 
 	this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -98,7 +103,7 @@ IcarusGenerator.prototype.editorConfig = function editorConfig() {
 };
 
 IcarusGenerator.prototype.mainStylesheet = function mainStylesheet() {
-	var css = '\n@import "box/box";\n@import "elem/elem";\n@import "form/form";\n@import "icons/icons";\n@import "list/list";\n@import "nav/nav";';
+	var css = '\n@import "box/box";\n@import "elem/elem";\n@import "form/form";\n@import "icons/icons";\n@import "list/list";\n@import "nav/nav";\n@import "plugins/plugins";';
 	var bsPath = '';
 	var deps = '';
 
@@ -110,13 +115,12 @@ IcarusGenerator.prototype.mainStylesheet = function mainStylesheet() {
 	}
 
 	if (this.bootstrap) {
-		bsPath += '@import "../bower_components/bootstrap/less/bootstrap;"\n@import "bootstrap/variables;"\n';
+		bsPath += '@import "../bower_components/bootstrap/less/bootstrap";\n@import "bootstrap/variables";\n';
 		this.write('app/css/bootstrap/variables.less', deps);
 	} else {
-		bsPath = '@import "system/bootstrap;"\n';
+		bsPath = '@import (css) "../bower_components/normalize-css/normalize.css";\n@import "system/bootstrap";\n';
 		this.write('app/css/system/variables.less', deps);
-		var customBs = '@import (css) "../bower_components/normalize-css/normalize.css";\n';
-		customBs += '@import "variables";\n@import "mixins";\n@import "structure";\n@import "type";\n@import "utilities";\n';
+		var customBs = '@import "variables";\n@import "mixins";\n@import "structure";\n@import "type";\n@import "utilities";\n';
 		this.write('app/css/system/bootstrap.less', customBs);
 	}
 
@@ -137,8 +141,7 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 
 	this.indexFile = this.appendScripts(this.indexFile, 'js/main.js', [
 		'bower_components/jquery/jquery.js',
-		'js/main.js',
-		'js/hello.js'
+		'js/main.js'
 	]);
 
 
@@ -164,7 +167,7 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 		defaults.push('Font Awesome <i class="fa fa-flag"></i>');
 	}
 
-	this.mainJsFile = 'console.log("Hello World!");';
+	this.mainJsFile = 'console.log(\'Hello World!\');';
 
 	// iterate over defaults and create content string
 	defaults.forEach(function (el) {
@@ -186,13 +189,9 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 
 IcarusGenerator.prototype.app = function app() {
 	this.directory('app');
-	this.write('app/index.html', this.indexFile);
+	this.write('app/main.html', this.indexFile);
 	this.write('app/js/main.js', this.mainJsFile);
 
-	fs.symlinkSync('../bower_components', 'app/include/bower_components', 'dir');
-	fs.symlinkSync('../css', 'app/include/css', 'dir');
-	fs.symlinkSync('../img', 'app/include/img', 'dir');
-	fs.symlinkSync('../js', 'app/include/js', 'dir');
 
 	if (!this.bootstrap) {
 		this.write('app/css/system/mixins.less', '/* Mixins */\n\n');
