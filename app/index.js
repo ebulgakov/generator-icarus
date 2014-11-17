@@ -1,6 +1,7 @@
 'use strict';
 var util = require('util');
 var path = require('path');
+var fs = require('fs');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 
@@ -141,7 +142,7 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 	]);
 
 
-	if (this.angular) {
+	if (this.bootstrap) {
 		// wire Bootstrap plugins
 		this.indexFile = this.appendScripts(this.indexFile, 'js/vendor/bootstrap.js', [
 			'bower_components/bootstrap/js/affix.js',
@@ -187,6 +188,11 @@ IcarusGenerator.prototype.app = function app() {
 	this.directory('app');
 	this.write('app/index.html', this.indexFile);
 	this.write('app/js/main.js', this.mainJsFile);
+
+	fs.symlinkSync('../bower_components', 'app/include/bower_components', 'dir');
+	fs.symlinkSync('../css', 'app/include/css', 'dir');
+	fs.symlinkSync('../img', 'app/include/img', 'dir');
+	fs.symlinkSync('../js', 'app/include/js', 'dir');
 
 	if (!this.bootstrap) {
 		this.write('app/css/system/mixins.less', '/* Mixins */\n\n');
