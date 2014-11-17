@@ -1,0 +1,19 @@
+{
+  "name": "generator-icarus",
+  "version": "0.0.1",
+  "description": "generator HTML for yeoman",
+  "main": "app/index.js",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Evgeniy Bulgakov",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^0.5.1",
+    "yeoman-generator": "^0.18.0",
+    "yosay": "^1.0.0"
+  }
+}
