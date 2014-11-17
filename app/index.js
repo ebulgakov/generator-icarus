@@ -8,34 +8,17 @@ var chalk = require('chalk');
 var IcarusGenerator = module.exports = function IcarusGenerator (args, options, config) {
 	yeoman.generators.Base.apply(this, arguments);
 
-	// setup the test-framework property, Gruntfile template will need this
-	this.testFramework = options['test-framework'] || 'mocha';
-
-	// for hooks to resolve on mocha by default
-	if (!options['test-framework']) {
-		options['test-framework'] = 'mocha';
-	}
-
 	this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'main.html'));
 	this.mainJsFile = '';
 
 	this.on('end', function () {
-		// FIXIT: using composewith prevent installDependencies to run bower correctly
-		// this.composeWith(this.options['test-framework'], {
-		this.invoke(this.options['test-framework'], {
-				options: {
-					'skip-message': options['skip-install-message'],
-					'skip-install': options['skip-install'],
-					'coffee': true
-				}
-			});
-
+		/*
 		if (!this.options['skip-install']) {
 			this.installDependencies({
 				skipMessage: options['skip-install-message'],
 				skipInstall: options['skip-install']
 			});
-		}
+		}*/
 	});
 
 	this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -61,23 +44,13 @@ IcarusGenerator.prototype.askFor = function askFor() {
 		message: 'What more would you like?',
 		choices: [
 			{
-				name: 'Angular files',
-				value: 'angular',
+				name: 'Bootstrap',
+				value: 'bootstrap',
 				checked: true
-			},
-			{
-				name: 'RequireJS',
-				value: 'reqirejs',
-				checked: false
 			},
 			{
 				name: 'FontAwesome',
 				value: 'fontawesome',
-				checked: false
-			},
-			{
-				name: 'respond.js (mediaquery polyfill for ie6-8)',
-				value: 'respondjs',
 				checked: false
 			}
 		]
@@ -90,9 +63,8 @@ IcarusGenerator.prototype.askFor = function askFor() {
 			return features && features.indexOf(feat) !== -1;
 		}
 
-		this.angular = hasFeature('angular');
+		this.bootstrap = hasFeature('bootstrap');
 		this.fontawesome = hasFeature('fontawesome');
-		this.respondjs = hasFeature('respondjs');
 
 		cb();
 	}.bind(this));
@@ -140,7 +112,7 @@ IcarusGenerator.prototype.mainStylesheet = function mainStylesheet() {
 
 	html = html + '.browsehappy {\n  margin: 0.2em 0; \n  background: #ccc; \n  color: #000; \n  padding: 0.2em 0; \n}\n\n';
 	html = html + '.jumbotron {\n  margin: 50px auto 0 auto;\n}';
-	this.write('app/styles/main.less', html);
+	this.write('app/css/styles.less', html);
 };
 
 IcarusGenerator.prototype.writeIndex = function writeIndex() {
@@ -154,16 +126,16 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 		'        <ul>'
 	];
 
-	this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
+	this.indexFile = this.appendScripts(this.indexFile, 'js/main.js', [
 		'bower_components/jquery/jquery.js',
-		'scripts/main.js',
-		'scripts/hello.js'
+		'js/main.js',
+		'js/hello.js'
 	]);
 
 
 	if (this.angular) {
 		// wire Bootstrap plugins
-		this.indexFile = this.appendScripts(this.indexFile, 'scripts/vendor/bootstrap.js', [
+		this.indexFile = this.appendScripts(this.indexFile, 'js/vendor/bootstrap.js', [
 			'bower_components/bootstrap/js/affix.js',
 			'bower_components/bootstrap/js/alert.js',
 			'bower_components/bootstrap/js/dropdown.js',
@@ -183,18 +155,7 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 		defaults.push('Font Awesome <i class="fa fa-flag"></i>');
 	}
 
-	if (this.respondjs) {
-		defaults.push('Respond.js');
-
-		var html = '<!--[if lt IE 9]>\n';
-		html = html + '<script src="scripts/vendor/respond.min.js"></script>\n';
-		html = html + '<![endif]-->\n';
-
-		this.indexFile = this.indexFile.replace('</head>', html + '</head>');
-	}
-
-	this.mainJsFile = 'console.log(\'\\\'Allo \\\'Allo!\');';
-	this.mainCoffeeFile = '### jshint white:false ###\n\n\'use strict\'\nconsole.log \'\\\'Allo from CoffeeScript!\'';
+	this.mainJsFile = 'console.log("Hello World!");';
 
 	// iterate over defaults and create content string
 	defaults.forEach(function (el) {
@@ -216,10 +177,9 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 
 IcarusGenerator.prototype.app = function app() {
 	this.mkdir('app');
-	this.mkdir('app/scripts');
-	this.mkdir('app/styles');
-	this.mkdir('app/images');
+	this.mkdir('app/js');
+	this.mkdir('app/css');
+	this.mkdir('app/img');
 	this.write('app/index.html', this.indexFile);
-	this.write('app/scripts/hello.coffee', this.mainCoffeeFile);
-	this.write('app/scripts/main.js', this.mainJsFile);
+	this.write('app/js/main.js', this.mainJsFile);
 };
