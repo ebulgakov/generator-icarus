@@ -1,6 +1,6 @@
 {
 	"name": "generator-icarus",
-	"version": "0.0.1",
+	"version": "0.0.0",
 	"description": "Modern HTML-generator, included: bootstrap, include-replace, sprite-generator and more",
 	"main": "app/index.js",
 	"keywords": [
@@ -28,7 +28,7 @@
 		"type" : "git",
 		"url" : "http://github.com/zoom-samara/generator-icarus.git"
 	},
-	"license": "BSD",
+	"license": "MIT",
 	"dependencies": {
 		"yeoman-generator": "~0.17.6",
 		"yosay": "^1.0.0",
