@@ -1,10 +1,17 @@
 {
 	"name": "generator-icarus",
 	"version": "0.0.1",
-	"description": "generator HTML for yeoman",
+	"description": "Modern HTML-generator, included: bootstrap, include-replace, sprite-generator and more",
 	"main": "app/index.js",
 	"keywords": [
-		"yeoman-generator"
+		"yeoman-generator",
+		"bootstrap",
+		"sprite",
+		"h5bp",
+		"html-validator",
+		"modernizr",
+		"jquery",
+		"include-replace"
 	],
 	"files": [
 		"app"
@@ -12,8 +19,16 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "Evgeniy Bulgakov",
-	"license": "ISC",
+	"author": {
+		"name" : "Evgeniy Bulgakov",
+		"email" : "zoom81@ya.ru",
+		"url" : "http://bulgakovevgeniy.moikrug.ru/"
+	},
+	"repository": {
+		"type" : "git",
+		"url" : "http://github.com/zoom-samara/generator-icarus.git"
+	},
+	"license": "BSD",
 	"dependencies": {
 		"yeoman-generator": "~0.17.6",
 		"yosay": "^1.0.0",
