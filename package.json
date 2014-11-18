@@ -1,6 +1,6 @@
 {
 	"name": "generator-icarus",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "Modern HTML-generator, included: bootstrap, include-replace, sprite-generator and more",
 	"main": "app/index.js",
 	"keywords": [
