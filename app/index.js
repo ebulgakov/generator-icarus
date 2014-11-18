@@ -140,11 +140,11 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 	// prepare default content text
 	var defaults = ['HTML5 Boilerplate', 'Bootstrap'];
 	var contentText = [
-		'    <div class="container">',
-		'      <div class="jumbotron">',
-		'        <h1><i class="icon-yeoman"></i> \'Allo, \'Allo!</h1>',
-		'        <p>You now have</p>',
-		'        <ul>'
+		'<div class="container">',
+		'	<div class="jumbotron">',
+		'		<h1><i class="icon-yeoman"></i> \'Allo, \'Allo!</h1>',
+		'		<p>You now have</p>',
+		'		<ul>'
 	];
 
 
@@ -156,20 +156,19 @@ IcarusGenerator.prototype.writeIndex = function writeIndex() {
 
 	// iterate over defaults and create content string
 	defaults.forEach(function (el) {
-		contentText.push('          <li>' + el  + '</li>');
+		contentText.push('			<li>' + el  + '</li>');
 	});
 
 	contentText = contentText.concat([
-		'        </ul>',
-		'        <p>installed.</p>',
-		'        <h3>Enjoy coding! - Yeoman</h3>',
-		'      </div>',
-		'    </div>',
-		''
+		' 		</ul>',
+		'		<p>installed.</p>',
+		'		<h3>Enjoy coding! - Yeoman</h3>',
+		'	</div>',
+		'</div>'
 	]);
 
 	// append the default content
-	this.indexFile = this.indexFile.replace('@@include("include/header.html")', '@@include("include/header.html")\n' + contentText.join('\n'));
+	this.indexFile = this.indexFile.replace('<div class="container"></div>', contentText.join('\n'));
 
 };
 
