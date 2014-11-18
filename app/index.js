@@ -125,7 +125,7 @@ IcarusGenerator.prototype.mainStylesheet = function mainStylesheet() {
 		bsPath += '@import (once) "../bower_components/bootstrap/less/bootstrap";\n@import (once) "bootstrap/variables";\n';
 		this.write('app/css/bootstrap/variables.less', deps);
 	} else {
-		bsPath += '@import (css) "../bower_components/normalize-css/normalize.css";\n@import (once) "system/bootstrap";\n';
+		bsPath += '@import (css) "../bower_components/normalize.css/normalize.css";\n@import (once) "system/bootstrap";\n';
 		this.write('app/css/system/variables.less', deps);
 
 		var customBs = '@import (once) "variables";\n@import (once) "mixins";\n@import (once) "structure";\n@import (once) "type";\n@import (once) "utilities";\n';
