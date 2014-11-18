@@ -1,4 +1,4 @@
-// Generated on <%= (new Date).toISOString().split('T')[0] %> using <%= pkg.name %> <%= pkg.version %>
+// Generated on <%%= (new Date).toISOString().split('T')[0] %> using <%%= pkg.name %> <%%= pkg.version %>
 'use strict';
 
 // # Globbing
@@ -23,8 +23,10 @@ module.exports = function (grunt) {
 		yeoman: yeomanConfig,
 		watch: {
 			less: {
-				files: ['<%%= yeoman.app %>/css/{,*/}*.less'],
-				tasks: ['less', 'autoprefixer']
+				files: [
+					'<%%= yeoman.app %>/css/{,*/}*.less'
+				],
+				tasks: ['less_imports', 'less', 'autoprefixer']
 			},
 			gruntfile: {
 				files: ['Gruntfile.js']
@@ -75,7 +77,6 @@ module.exports = function (grunt) {
 				files: [{
 					dot: true,
 					src: [
-						'.tmp',
 						'<%%= yeoman.dist %>/*',
 						'!<%%= yeoman.dist %>/.git*'
 					]
@@ -121,7 +122,7 @@ module.exports = function (grunt) {
 					'<%%= yeoman.app %>/css/styles.css': ['<%%= yeoman.app %>/css/styles.less']
 				},
 				options: {
-					sourceMap: true,
+					sourceMap: <% if (lessmap) { %>true<% } else { %>false<% } %>,
 					sourceMapFilename: '<%%= yeoman.app %>/css/styles.css.map',
 					sourceMapBasepath: '<%%= yeoman.app %>/',
 					sourceMapRootpath: '/'
@@ -262,7 +263,7 @@ module.exports = function (grunt) {
 				'destImg': '<%%= yeoman.app %>/img/i/sprite.png',
 
 				// Stylus with variables under sprite names
-				'destCSS': '<%%= yeoman.app %>/css/icons/icons.less',
+				'destCSS': '<%%= yeoman.app %>/css/icons/_.less',
 
 				'cssTemplate': '<%%= yeoman.app %>/css/icons/icons.template.mustache',
 
@@ -307,6 +308,40 @@ module.exports = function (grunt) {
 					 'timeout': 10000
 				}
 			}
+		},
+		/*jshint camelcase: false */
+		less_imports: { /*jshint camelcase: true */
+			options: {
+				banner: '// The file is automatically generated'
+			},
+			make: {
+				files: [
+					{
+						src:  '<%%= yeoman.app %>/css/box/*',
+						dest: '<%%= yeoman.app %>/css/box/_.less'
+					},
+					{
+						src:  '<%%= yeoman.app %>/css/elem/*',
+						dest: '<%%= yeoman.app %>/css/elem/_.less'
+					},
+					{
+						src:  '<%%= yeoman.app %>/css/form/*',
+						dest: '<%%= yeoman.app %>/css/form/_.less'
+					},
+					{
+						src:  '<%%= yeoman.app %>/css/list/*',
+						dest: '<%%= yeoman.app %>/css/list/_.less'
+					},
+					{
+						src:  '<%%= yeoman.app %>/css/nav/*',
+						dest: '<%%= yeoman.app %>/css/nav/_.less'
+					},
+					{
+						src:  '<%%= yeoman.app %>/css/plugins/*',
+						dest: '<%%= yeoman.app %>/css/plugins/_.less'
+					}
+				]
+			}
 		}
 	});
 
@@ -319,6 +354,7 @@ module.exports = function (grunt) {
 			'clean:server',
 			'clean:sprite',
 			'sprite',
+			'less_imports',
 			'less',
 			'autoprefixer',
 			'includereplace',
@@ -337,20 +373,19 @@ module.exports = function (grunt) {
 	grunt.registerTask('test', [
 		'clean:server',
 		'clean:sprite',
-		'sprite',
-		'less',
-		'autoprefixer',
 		'includereplace',
-		'copy:server',
+		'jshint',
 		'validation'
 	]);
 
 
 	grunt.registerTask('build', [
-		'clean:dist',
+		'clean',
 		'copy:server',
 		'includereplace',
 		'useminPrepare',
+		'sprite',
+		'less_imports',
 		'less',
 		'autoprefixer',
 		'concurrent',

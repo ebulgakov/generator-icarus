@@ -57,6 +57,11 @@ IcarusGenerator.prototype.askFor = function askFor() {
 				name: 'FontAwesome',
 				value: 'fontawesome',
 				checked: false
+			},
+			{
+				name: 'Less Map',
+				value: 'lessmap',
+				checked: false
 			}
 		]
 	}];
@@ -70,6 +75,7 @@ IcarusGenerator.prototype.askFor = function askFor() {
 
 		this.bootstrap = hasFeature('bootstrap');
 		this.fontawesome = hasFeature('fontawesome');
+		this.lessmap = hasFeature('lessmap');
 
 		cb();
 	}.bind(this));
@@ -102,7 +108,7 @@ IcarusGenerator.prototype.editorConfig = function editorConfig() {
 };
 
 IcarusGenerator.prototype.mainStylesheet = function mainStylesheet() {
-	var css = '\n@import "box/box";\n@import "elem/elem";\n@import "form/form";\n@import "icons/icons";\n@import "list/list";\n@import "nav/nav";\n@import "plugins/plugins";';
+	var css = '\n@import (once) "box/_";\n@import (once) "elem/_";\n@import (once) "form/_";\n@import (once) "icons/_";\n@import (once) "list/_";\n@import (once) "nav/_";\n@import (once) "plugins/_";';
 	var bsPath = '';
 	var deps = '';
 
@@ -111,18 +117,18 @@ IcarusGenerator.prototype.mainStylesheet = function mainStylesheet() {
 
 	if (this.fontawesome) {
 		deps += '@fa-font-path: "../fonts/font-awesome";\n';
-		bsPath += '@import "../bower_components/font-awesome/less/font-awesome";\n';
+		bsPath += '@import (once) "../bower_components/font-awesome/less/font-awesome";\n';
 	}
 
 	if (this.bootstrap) {
 		deps += '@icon-font-path: "../fonts/glyphicons/";\n';
-		bsPath += '@import "../bower_components/bootstrap/less/bootstrap";\n@import "bootstrap/variables";\n';
+		bsPath += '@import (once) "../bower_components/bootstrap/less/bootstrap";\n@import (once) "bootstrap/variables";\n';
 		this.write('app/css/bootstrap/variables.less', deps);
 	} else {
-		bsPath += '@import (css) "../bower_components/normalize-css/normalize.css";\n@import "system/bootstrap";\n';
+		bsPath += '@import (css) "../bower_components/normalize-css/normalize.css";\n@import (once) "system/bootstrap";\n';
 		this.write('app/css/system/variables.less', deps);
 
-		var customBs = '@import "variables";\n@import "mixins";\n@import "structure";\n@import "type";\n@import "utilities";\n';
+		var customBs = '@import (once) "variables";\n@import (once) "mixins";\n@import (once) "structure";\n@import (once) "type";\n@import (once) "utilities";\n';
 		this.write('app/css/system/bootstrap.less', customBs);
 	}
 
