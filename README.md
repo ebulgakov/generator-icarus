@@ -23,6 +23,20 @@ Icarus (0.1.0)
 Более подробное руководство и пример установленного фреймфорка ищите тут: [icarusTemplate]
 
 
+## Todo's
+
+ * Написать тесты
+ * Добавить поддержку [AngularJS]
+ * Добавить поддержку  [RequireJS]
+
+## Если что-то пошло не так, как надо
+Если вы обнаружили ошибку или хотите  добавить пожелание, есть два проверенных способа:
+
+* Завести задачу в [Issues]
+* Если вдруг не отвечаю,написать сразу на zoom81@ya.ru
+
+
+
 License
 ----
 
@@ -30,6 +44,7 @@ MIT
 
 
 **Free Software, Hell Yeah!**
+[Issues]: https://github.com/zoom-samara/generator-icarus/issues
 [icarusTemplate]: https://github.com/zoom-samara/icarus-template
 [Yeoman]: http://yeoman.io/
 [nodeJS]:http://nodejs.org
