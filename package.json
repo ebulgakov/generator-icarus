@@ -1,37 +1,41 @@
 {
-	"name": "generator-icarus",
-	"version": "0.1.2",
-	"description": "Modern HTML-generator, included: bootstrap, include-replace, sprite-generator and more",
-	"main": "app/index.js",
-	"keywords": [
-		"yeoman-generator",
-		"bootstrap",
-		"sprite",
-		"h5bp",
-		"html-validator",
-		"modernizr",
-		"jquery",
-		"include-replace"
-	],
-	"files": [
-		"app"
-	],
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"author": {
-		"name" : "Evgeniy Bulgakov",
-		"email" : "zoom81@ya.ru",
-		"url" : "http://bulgakovevgeniy.moikrug.ru/"
-	},
-	"repository": {
-		"type" : "git",
-		"url" : "http://github.com/zoom-samara/generator-icarus.git"
-	},
-	"license": "MIT",
-	"dependencies": {
-		"yeoman-generator": "~0.17.6",
-		"yosay": "^1.0.0",
-		"chalk": "^0.5.1"
-	}
+  "name": "generator-icarus",
+  "version": "0.1.2",
+  "description": "Modern HTML-generator, included: bootstrap, include-replace, sprite-generator and more",
+  "main": "app/index.js",
+  "keywords": [
+    "yeoman-generator",
+    "bootstrap",
+    "sprite",
+    "h5bp",
+    "html-validator",
+    "modernizr",
+    "jquery",
+    "include-replace"
+  ],
+  "files": [
+    "app"
+  ],
+  "author": {
+    "name": "Evgeniy Bulgakov",
+    "email": "zoom81@ya.ru",
+    "url": "http://bulgakovevgeniy.moikrug.ru/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/zoom-samara/generator-icarus.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "~0.17.6",
+    "yosay": "^1.0.0",
+    "chalk": "^0.5.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.1",
+    "underscore": "^1.8.2"
+  },
+  "scripts": {
+  	"test": "mocha --reporter spec"
+  }
 }

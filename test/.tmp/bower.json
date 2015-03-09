@@ -1,0 +1,14 @@
+{
+  "name": "tmp",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "~3",
+    
+    
+    "modernizr": "~2",
+    "jquery": "~2",
+    "jquery-1.x":  "jquery#~1"
+  },
+  "devDependencies": {}
+}
+
