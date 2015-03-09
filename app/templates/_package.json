@@ -21,7 +21,7 @@
     "grunt-include-replace": "^2.0.0",
     "grunt-less-imports": "^1.1.0",
     "grunt-rev": "~0.1.0",
-    "grunt-spritesmith": "^2.20.0",
+    "grunt-spritesmith": "^4.2.0",
     "grunt-usemin": "~2.4.0",
     "jshint-stylish": "~1.0.0",
     "load-grunt-tasks": "~0.6.0",

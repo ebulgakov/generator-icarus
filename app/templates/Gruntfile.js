@@ -256,55 +256,20 @@ module.exports = function (grunt) {
 		},
 		sprite: {
 			'all': {
-				// Sprite files to read in
 				'src': ['<%%= yeoman.app %>/img/i/*.png'],
-
-				// Location to output spritesheet
-				'destImg': '<%%= yeoman.app %>/img/i/sprite.png',
-
-				// Stylus with variables under sprite names
-				'destCSS': '<%%= yeoman.app %>/css/icons/_.less',
-
-				'cssTemplate': '<%%= yeoman.app %>/css/icons/icons.template.mustache',
-
-				// OPTIONAL: Manual override for imgPath specified in CSS
+				'dest': ['<%%= yeoman.app %>/img/i/sprite.png',
+				'destCss': ['<%%= yeoman.app %>/css/icons/_.less',
 				'imgPath': '@{icon-path}sprite.png',
-
-				// OPTIONAL: Specify algorithm (top-down, left-right, diagonal [\ format],
-						// alt-diagonal [/ format], binary-tree [best packing])
-				// Visual representations can be found below
 				'algorithm': 'binary-tree',
-
-				// OPTIONAL: Specify padding between images
 				'padding': 2,
-
-				// OPTIONAL: Specify engine (auto, phantomjs, canvas, gm, pngsmith)
-				'engine': 'auto',
-
-				// OPTIONAL: Specify CSS format (inferred from destCSS' extension by default)
-						// (stylus, scss, scss_maps, sass, less, json, json_array, css)
-				'cssFormat': 'css',
-
-				// OPTIONAL: Specify settings for algorithm
-				'algorithmOpts': {
-					// Skip sorting of images for algorithm (useful for sprite animations)
-					'sort': false
-				},
-
-				// OPTIONAL: Specify settings for engine
+				'cssTemplate': '<%%= yeoman.app %>/css/icons/icons.template.mustache',
 				'engineOpts': {
 					'imagemagick': true
 				},
-
-				// OPTIONAL: Specify img options
+				'cssFormat': 'css',
 				'imgOpts': {
-					 // Format of the image (inferred from destImg' extension by default) (jpg, png)
 					 'format': 'png',
-
-					 // gm only: Quality of image
 					 'quality': 90,
-
-					 // phantomjs only: Milliseconds to wait before terminating PhantomJS script
 					 'timeout': 10000
 				}
 			}
