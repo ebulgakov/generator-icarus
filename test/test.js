@@ -29,7 +29,6 @@ describe('Icarus generator', function () {
 			'app/css/styles.less',
 			'app/.htaccess',
 			'app/404.html',
-			'app/css/.DS_Store',
 			'app/css/icons/icons.template.mustache',
 			'app/favicon.ico',
 			'app/img/i/icon-yeoman.png',
