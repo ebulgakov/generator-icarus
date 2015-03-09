@@ -357,6 +357,7 @@ module.exports = function (grunt) {
 		'cssmin',
 		'concat',
 		'copy',
+		'rev',
 		'usemin',
 		'uglify:custom'
 	]);
