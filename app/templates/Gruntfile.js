@@ -257,8 +257,8 @@ module.exports = function (grunt) {
 		sprite: {
 			'all': {
 				'src': ['<%%= yeoman.app %>/img/i/*.png'],
-				'dest': ['<%%= yeoman.app %>/img/i/sprite.png',
-				'destCss': ['<%%= yeoman.app %>/css/icons/_.less',
+				'dest': '<%%= yeoman.app %>/img/i/sprite.png',
+				'destCss': '<%%= yeoman.app %>/css/icons/_.less',
 				'imgPath': '@{icon-path}sprite.png',
 				'algorithm': 'binary-tree',
 				'padding': 2,
