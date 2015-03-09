@@ -1,3 +1,4 @@
+[![Build Status](https://semaphoreci.com/api/v1/projects/506a9684-9902-45f0-b8f4-54c6a53fe32c/368286/shields_badge.svg)](https://semaphoreci.com/zoom/generator-icarus)
 Icarus (0.1.2)
 ================
 
